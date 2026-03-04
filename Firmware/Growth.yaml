@@ -1,0 +1,144 @@
+esphome:
+  name: shruberry
+  comment: Soil and air monitor node
+  friendly_name: Shruberry
+
+esp32:
+  board: esp32-c3-devkitm-1
+  flash_size: 4MB
+  cpu_frequency: 160MHz
+  framework:
+    type: arduino
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: "encryption_key_here"
+
+ota:
+  - platform: esphome
+    password: "secure_ota_password"
+
+# WiFi configuration with fallback mechanisms
+wifi:
+  ssid: "Your_WiFi_SSID"
+  password: "Your_WiFi_Password"
+  ap:
+    ssid: "Shruberry_AP"
+    password: ""
+
+# Add captive portal for AP mode
+captive_portal:
+
+# Enable web server for status page
+web_server:
+  port: 80
+  local: true
+  version: 3
+
+# Define I2C bus
+i2c:
+  id: bus_i2c
+  sda: GPIO7
+  scl: GPIO8
+  scan: true
+  frequency: 400kHz
+
+#MARK: Buttons
+binary_sensor:
+  - platform: gpio
+    pin:
+      number: GPIO9
+      mode:
+        input: true
+        pullup: true
+      inverted: true
+    name: "Button A"
+    id: button_a
+    icon: mdi:gesture-tap
+    on_press:
+      - logger.log: "Button A pressed"
+
+switch:
+  - platform: factory_reset
+    name: Restart with Factory Default Settings
+  #MARK: Relay Enable
+  - platform: gpio
+    pin: GPIO2
+    name: "Relay Enable"
+    id: relay_switch
+    device_class: switch
+    icon: mdi:power-plug
+
+  #MARK: Relays
+  - platform: gpio
+    id: relay0
+    name: "Outlet 1"
+    device_class: outlet
+    icon: "mdi:power-socket-ch"
+    internal: false
+    restore_mode: ALWAYS_OFF
+    pin: GPIO0
+  - platform: gpio
+    id: relay1
+    name: "Outlet 2"
+    device_class: outlet
+    icon: "mdi:power-socket-ch"
+    internal: false
+    restore_mode: ALWAYS_OFF
+    pin: GPIO1
+
+# Status sensors
+sensor:
+  - platform: wifi_signal
+    name: "WiFi Signal"
+    update_interval: 60s
+
+  - platform: uptime
+    name: "Uptime"
+    update_interval: 60s
+
+  - platform: adc
+    pin: GPIO4
+    name: "Soil"
+    update_interval: 10s
+    attenuation: 11db
+    #filters:
+    #  - multiply: 3.3
+
+# Define text sensors for device status
+text_sensor:
+  - platform: wifi_info
+    ip_address:
+      name: "IP Address"
+    ssid:
+      name: "Connected SSID"
+    bssid:
+      name: "Connected BSSID"
+      internal: true
+    mac_address:
+      name: "MAC Address"
+      internal: true
+
+# Define buttons for device control
+button:
+  - platform: restart
+    name: "Restart Node"
+
+# Add a time component to keep track of time
+time:
+  - platform: homeassistant
+    id: homeassistant_time
+    on_time_sync:
+      then:
+        - logger.log: "Time synchronized with Home Assistant"
+
+# Add persistent storage for configuration
+globals:
+  - id: config_version
+    type: int
+    restore_value: yes
+    initial_value: "1"
