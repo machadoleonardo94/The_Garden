@@ -7370,6 +7370,16 @@
 	)
 	(wire
 		(pts
+			(xy 195.58 109.22) (xy 205.74 109.22)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1127de57-07d1-45eb-b15c-0a1484221cf0")
+	)
+	(wire
+		(pts
 			(xy 49.53 110.49) (xy 50.8 110.49)
 		)
 		(stroke
@@ -7477,6 +7487,16 @@
 			(type default)
 		)
 		(uuid "1ddbca4d-8808-4a9d-96a6-e03ddfb3dd05")
+	)
+	(wire
+		(pts
+			(xy 204.47 113.03) (xy 204.47 111.76)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1f3254f6-f7a7-4c10-9eef-163cb9b45ba4")
 	)
 	(wire
 		(pts
@@ -8477,6 +8497,16 @@
 			(type default)
 		)
 		(uuid "7bd5362d-4466-4b2e-a500-d8188604f6d9")
+	)
+	(wire
+		(pts
+			(xy 204.47 111.76) (xy 205.74 111.76)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7be1edae-4c95-447c-9957-160031c0122c")
 	)
 	(wire
 		(pts
@@ -10047,6 +10077,16 @@
 			(type default)
 		)
 		(uuid "fcfc7dca-2cfe-4053-bc1c-0f303d5d343b")
+	)
+	(wire
+		(pts
+			(xy 195.58 106.68) (xy 205.74 106.68)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ff0badf0-ee58-49f6-8b6a-d3afc5c9d673")
 	)
 	(wire
 		(pts
@@ -13264,7 +13304,6 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "267beb42-ca81-4d2e-999c-19942369095b")
 		(property "Reference" "#PWR054"
 			(at 200.66 116.84 0)
@@ -13276,7 +13315,7 @@
 			)
 		)
 		(property "Value" "+3.3V"
-			(at 200.66 107.95 0)
+			(at 196.342 111.506 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16507,6 +16546,72 @@
 			(project "Aranakin"
 				(path "/435bb94e-d379-4041-9433-e08282ea3ba2"
 					(reference "#PWR019")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 204.47 113.03 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "5bc49b73-76b8-49ff-9a8d-5e0e12a5c4f4")
+		(property "Reference" "#PWR040"
+			(at 204.47 119.38 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 204.47 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 204.47 113.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 204.47 113.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 204.47 113.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "aef3347e-c79a-4d80-8722-e36c4ec12172")
+		)
+		(instances
+			(project "Aranakin"
+				(path "/435bb94e-d379-4041-9433-e08282ea3ba2"
+					(reference "#PWR040")
 					(unit 1)
 				)
 			)
@@ -20405,6 +20510,79 @@
 			(project ""
 				(path "/435bb94e-d379-4041-9433-e08282ea3ba2"
 					(reference "JP1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector:Conn_01x03_Socket")
+		(at 210.82 109.22 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "a4394d89-9f3c-4cdc-830b-dd53d078b9fc")
+		(property "Reference" "PORT2"
+			(at 205.74 103.632 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "Conn_01x03_Socket"
+			(at 212.09 110.4899 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical"
+			(at 210.82 109.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 210.82 109.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Generic connector, single row, 01x03, script generated"
+			(at 210.82 109.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "ba3f82cf-d883-4197-81f9-42d61fb4845c")
+		)
+		(pin "3"
+			(uuid "58be941a-adf3-462c-8001-669a44f75576")
+		)
+		(pin "1"
+			(uuid "289939dd-7372-4324-a3ec-8bee2be0c555")
+		)
+		(instances
+			(project "Aranakin"
+				(path "/435bb94e-d379-4041-9433-e08282ea3ba2"
+					(reference "PORT2")
 					(unit 1)
 				)
 			)
