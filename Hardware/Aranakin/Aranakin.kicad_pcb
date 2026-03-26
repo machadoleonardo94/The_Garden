@@ -9924,6 +9924,17 @@
 			(uuid "6f78f8bb-3ebc-4277-8f1c-e91e5c9c928e")
 		)
 		(embedded_fonts no)
+		(model "C:/Users/macha/Downloads/ESP32-C3 supermini v5.step"
+			(offset
+				(xyz -12.2 -16.2 -3)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz -90 -0 -180)
+			)
+		)
 	)
 	(footprint "Diode_SMD:D_SMA"
 		(layer "F.Cu")
