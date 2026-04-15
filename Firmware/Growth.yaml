@@ -72,6 +72,14 @@ switch:
     id: relay_switch
     device_class: switch
     icon: mdi:power-plug
+    restore_mode: RESTORE_DEFAULT_OFF
+  #MARK: Schedule Toggle
+  - platform: template
+    name: "Outlet 1 Schedule Enabled"
+    id: outlet1_schedule_enabled
+    icon: mdi:calendar-clock
+    restore_mode: RESTORE_DEFAULT_OFF
+    optimistic: true
 
   #MARK: Relays
   - platform: gpio
@@ -80,7 +88,7 @@ switch:
     device_class: outlet
     icon: "mdi:power-socket-ch"
     internal: false
-    restore_mode: ALWAYS_OFF
+    restore_mode: RESTORE_DEFAULT_OFF
     pin: GPIO0
   - platform: gpio
     id: relay1
@@ -88,7 +96,7 @@ switch:
     device_class: outlet
     icon: "mdi:power-socket-ch"
     internal: false
-    restore_mode: ALWAYS_OFF
+    restore_mode: RESTORE_DEFAULT_OFF
     pin: GPIO1
 
 # Status sensors
@@ -135,6 +143,48 @@ time:
     on_time_sync:
       then:
         - logger.log: "Time synchronized with Home Assistant"
+    on_time:
+      #MARK: Outlet 1 Schedule — fires every minute
+      - seconds: 0
+        minutes: "*"
+        hours: "*"
+        then:
+          - lambda: |-
+              if (!id(outlet1_schedule_enabled).state) return;
+              auto t = id(homeassistant_time).now();
+              if (!t.is_valid()) return;
+              int on_h = 0, on_m = 0, off_h = 0, off_m = 0;
+              sscanf(id(outlet1_on_time).state.c_str(),  "%d:%d", &on_h,  &on_m);
+              sscanf(id(outlet1_off_time).state.c_str(), "%d:%d", &off_h, &off_m);
+              if (t.hour == on_h && t.minute == on_m) {
+                id(relay0).turn_on();
+                ESP_LOGI("schedule", "Outlet 1 turned ON at %d:%02d", t.hour, t.minute);
+              }
+              if (t.hour == off_h && t.minute == off_m) {
+                id(relay0).turn_off();
+                ESP_LOGI("schedule", "Outlet 1 turned OFF at %d:%02d", t.hour, t.minute);
+              }
+
+#MARK: Outlet 1 Schedule Configuration
+text:
+  - platform: template
+    name: "Outlet 1 Turn On Time"
+    id: outlet1_on_time
+    mode: text
+    max_length: 5
+    initial_value: "06:00"
+    restore_value: true
+    optimistic: true
+    icon: mdi:clock-start
+  - platform: template
+    name: "Outlet 1 Turn Off Time"
+    id: outlet1_off_time
+    mode: text
+    max_length: 5
+    initial_value: "22:00"
+    restore_value: true
+    optimistic: true
+    icon: mdi:clock-end
 
 # Add persistent storage for configuration
 globals:
