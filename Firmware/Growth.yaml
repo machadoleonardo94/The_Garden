@@ -16,16 +16,16 @@ logger:
 # Enable Home Assistant API
 api:
   encryption:
-    key: "encryption_key_here"
+    key: "RdF1G7t8J7YeDF7+U37MlYBPoCRI7uNhtiTiJ7lXKgE="
 
 ota:
   - platform: esphome
-    password: "secure_ota_password"
+    password: "0afd624b144523bce53f36563bb89966"
 
 # WiFi configuration with fallback mechanisms
 wifi:
-  ssid: "Your_WiFi_SSID"
-  password: "Your_WiFi_Password"
+  ssid: "AleoExpress"
+  password: Engenharia01
   ap:
     ssid: "Shruberry_AP"
     password: ""
